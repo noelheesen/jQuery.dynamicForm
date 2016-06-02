@@ -1,0 +1,25 @@
+body {
+    background-color:#ebebeb;
+}
+
+#leftwrap {
+    width:28%;
+    min-width:300px;
+    background-color:#3e3e3e;
+    display:inline-block;
+    padding:1%;
+    color:#ebebeb;
+}
+#leftwrap div {
+    padding:10px;
+}
+#leftwrap h3 {
+    color:#ebebeb;
+}
+
+#rightwrap {
+    display:inline-block;
+    vertical-align:top;
+    width:71%;
+    
+}

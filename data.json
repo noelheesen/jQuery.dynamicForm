@@ -1,0 +1,74 @@
+[
+{
+  "select": [
+    {
+      "name": "Type",
+      "options": [
+        {
+          "value": "Book",
+          "display": "Book",
+          "dynamic": [
+          {
+            "type": "input",
+            "name": "Details[Chapter]",
+            "display": "Chapter",
+            "required": true
+          },
+          {
+            "type": "input",
+            "name": "Details[StartPage]",
+            "display": "Start Page",
+            "required": false
+          },
+          {
+            "type": "input",
+            "name": "Details[EndPage]",
+            "display": "End Page",
+            "required": false
+          }
+          ]
+        },
+        {
+          "value": "WebPage",
+          "display": "Web Page",
+          "dynamic": [
+          {
+            "type": "input",
+            "name": "Details[Url]",
+            "display": "Url",
+            "required": true
+          },
+          {
+            "type": "select",
+            "name": "Details[PageTypeIDs]",
+            "display": "Page Type",
+            "required": true,
+            "options": [
+            {
+              "value": "1",
+              "display": "Blog"
+            },
+            {
+              "value": "2",
+              "display": "Video"
+            },
+            {
+              "value": "3",
+              "display": "Article"
+            }
+            ]
+          }
+        ]
+        }
+      ]
+    }
+  ],
+  "statics": [
+    {
+      "type": "input",
+      "name": "Details[Name]",
+      "display": "Name"
+    }
+  ]
+}
+]

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="external/bootstrap.css"/>
+        <script type="text/javascript" src="external/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="external/bootstrap.js"></script>
+        
+        <script type="text/javascript" src="external/jquery.serialize-object.js"></script>
+        
+<!--
+        <script type="text/javascript" src="external/form2object.js"></script>
+        <script type="text/javascript" src="external/jquery.toObject.js"></script>
+-->
+        
+        <script type="text/javascript" src="jquery.dynamic-form.js"></script>
+        <link rel="stylesheet" type="text/css" href="formgenerator.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        
+        <script type="text/javascript">            
+    
+            var initjson = {
+  "select": [
+    {
+      "name": "Type",
+      "options": [
+        {
+          "value": "Book",
+          "display": "Book",
+          "dynamic": [
+          {
+            "type": "input",
+            "name": "Details[Chapter]",
+            "display": "Chapter",
+            "required": true
+          },
+          {
+            "type": "input",
+            "name": "Details[StartPage]",
+            "display": "Start Page",
+            "required": false
+          },
+          {
+            "type": "input",
+            "name": "Details[EndPage]",
+            "display": "End Page",
+            "required": false
+          }
+          ]
+        },
+        {
+          "value": "WebPage",
+          "display": "Web Page",
+          "dynamic": [
+          {
+            "type": "input",
+            "name": "Details[Url]",
+            "display": "Url",
+            "required": true
+          },
+          {
+            "type": "select",
+            "name": "Details[PageTypeIDs]",
+            "display": "Page Type",
+            "required": true,
+            "options": [
+            {
+              "value": "1",
+              "display": "Blog"
+            },
+            {
+              "value": "2",
+              "display": "Video"
+            },
+            {
+              "value": "3",
+              "display": "Article"
+            }
+            ]
+          }
+        ]
+        }
+      ]
+    }
+  ],
+  "statics": [
+    {
+      "type": "input",
+      "name": "Details[Name]",
+      "display": "Name"
+    }
+  ]
+}
+            
+            var generate = function() {
+                
+                var data = '[' + $('#jsondata').val() + ']'
+                data = JSON.parse(data)
+                
+                $('#form-holder').html('')
+                $('#form-holder').append('<form id="testform"></form>')
+                
+                $("#testform").generateForm({
+                    source: data
+                });
+                $("#testform").dynamicForm({
+                    saveToElementSelector: '#mog-result',
+                    renderToElementSelector: '#mog-displaywrap'
+                });
+            }
+
+            $(document).ready(function() {
+                
+                $('#jsondata').val(JSON.stringify(initjson))
+                
+                generate();
+                
+                $('#generate').on('click', function() {
+                    
+                    generate();
+                    
+                })
+            })
+            
+        </script>
+        
+        <script type="text/javascript">
+            $(document).on('ready', function() {
+                 
+                //Fix height issues for left wrap.
+                if($('#leftwrap').height() < $(window).height()) {
+                    $('#leftwrap').css('height', $(window).height())
+                }
+
+                
+                
+            })
+        </script>
+    </head>
+    <body>
+        
+        <div id="leftwrap">
+            
+            <h3 style="color:#158cba; text-align:center;">Dynamic Form Object Generator</h3>
+        
+            <div>
+                <h3>HTML:</h3>
+                <pre>&lt;form id="testform"&gt; &lt;/form&gt;</pre>
+                
+                <h3>JavaScript:</h3>
+                <pre>
+$("#testform").generateForm({
+    source: data
+});
+</pre>
+            </div>
+        
+            
+            <div>
+                <h3 style="display:inline; vertical-align:top; line-height:39.56px;">JSON input:</h3>
+                <pre class="pull-right" style="display:inline-block;"><a href="http://www.jsoneditoronline.org/?id=79224df91f96dbc72ed204d1c5121da0" target="_blank">View sample in json editor</a></pre>
+                <div class="clearfix"></div>
+                <pre>[<br /><textarea id="jsondata" style="width:100%; height:150px; resize:none; border:none; background-color:#f5f5f5;"></textarea><br />]</pre>
+                
+                <button id="generate" class="btn btn-primary" style="display:block; width:100%; margin-top:10px;">Generate form!</button>
+            </div>
+            
+            
+            
+            <div>
+                <h3>JSON output:</h3>
+                <p>specified element: '#mog-output' (default)</p>
+                <pre>&lt;div id=" --outputSelector-- " style="display:none;"&gt;&lt;/div&gt;</pre>
+                <p>Value = </p>
+                <pre id="form-output"></pre>
+            </div>
+
+        </div>
+        
+        <div id="rightwrap">
+        
+            <div id="formwrapper">
+                
+                <h2 style="color:rgb(21, 140, 186); margin-bottom:30px;">Generated form:</h2>
+        
+                <div id="form-holder">
+                    <form id="testform"> </form>
+                </div>
+                
+                <div id="mog-displaywrap" style="margin-top:35px;"></div>
+            
+                <div id="mog-result" style="display:none;"></div>
+            </div>
+            
+        </div>
+        
+        
+    </body>
+</html>
